@@ -1,14 +1,40 @@
 {
   "name": "bytesensei",
-  "version": "1.0.0",
-  "description": "a desktop app to analyze your code",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron src/electron.js"
+  "version": "0.1.0",
+  "main": "public/main.js",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "electron": "^24.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
-  "author": "ishant",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^24.3.1"
+  "scripts": {
+    "start": "BROWSER=NONE; react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "electron ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
