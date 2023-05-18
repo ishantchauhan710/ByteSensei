@@ -1,0 +1,14 @@
+{
+  "name": "bytesensei",
+  "version": "1.0.0",
+  "description": "a desktop app to analyze your code",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron src/electron.js"
+  },
+  "author": "ishant",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^24.3.1"
+  }
+}
