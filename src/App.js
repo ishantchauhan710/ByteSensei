@@ -1,7 +1,14 @@
+import { useEffect } from "react";
 import { FaFolderPlus } from "react-icons/fa";
 const { ipcRenderer } = window.require("electron");
 
 function App() {
+  useEffect(() => {
+    ipcRenderer.on("results", (e, data) => {
+      alert(JSON.stringify(data));
+    });
+  }, []);
+
   const openDirectoryPicker = () => {
     ipcRenderer.send("openDirectoryPicker");
   };
