@@ -59,7 +59,7 @@ const Table = ({ data }) => {
         </table>
       </div>
       <div className="flex items-center justify-end mx-2 my-3">
-        <button class="bg-neutral-950/80 hover:bg-neutral-950 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
+        <button class="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
           <FaSave className="text-lg mr-2" />
           <span className="text-sm">Export</span>
         </button>

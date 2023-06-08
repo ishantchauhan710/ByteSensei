@@ -52,15 +52,17 @@ const AppChart = ({ data }) => {
         />
       </div>
       <div className="flex items-center justify-end mx-2 mt-3">
-        <button class="bg-neutral-950/80 hover:bg-neutral-950 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
+        <button class="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
           <FaSave className="text-lg mr-2" />
           <span className="text-sm">Export</span>
         </button>
       </div>
-      <div className="w-1/2 m-auto">
+      <div className="w-1/2 m-auto min-h-[400px]">
         <Bar
           data={chartData}
           options={{
+            responsive: true,
+            maintainAspectRatio: false,
             plugins: {
               title: {
                 display: true,
@@ -74,7 +76,7 @@ const AppChart = ({ data }) => {
         />
       </div>
       <div className="flex items-center justify-end mx-2 mt-3">
-        <button class="bg-neutral-950/80 hover:bg-neutral-950 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
+        <button class="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
           <FaSave className="text-lg mr-2" />
           <span className="text-sm">Export</span>
         </button>

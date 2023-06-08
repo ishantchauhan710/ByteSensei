@@ -22,11 +22,11 @@ function App() {
   });
   const router = createBrowserRouter([
     {
-      path: "/ishant",
+      path: "/",
       element: <Home setData={setData} />,
     },
     {
-      path: "/",
+      path: "/analytics",
       element: <Analytics data={data} />,
     },
   ]);

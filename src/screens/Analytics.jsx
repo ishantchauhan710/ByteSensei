@@ -24,7 +24,6 @@ const Analytics = ({ data }) => {
   return (
     <div className="bg-neutral-800 text-white p-4">
       <Header />
-
       <Table data={results} />
       <AppChart data={results} />
     </div>
