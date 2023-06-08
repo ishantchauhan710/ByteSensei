@@ -1,11 +1,14 @@
 import React from "react";
 import { FaSave } from "react-icons/fa";
 
-const Table = ({data}) => {
+const Table = ({ data }) => {
   return (
-    <>
+    <div className="mt-4">
+      <div className="text-2xl font-bold py-2 flex items-center">
+        Basic Details
+      </div>
       <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-lefttext-neutral-400 text-center">
+        <table class="w-full text-sm text-neutral-400 text-center">
           <thead class="text-xs  uppercase bg-neutral-700 text-neutral-400">
             <tr>
               <th scope="col" class="px-6 py-3">
@@ -61,7 +64,7 @@ const Table = ({data}) => {
           <span className="text-sm">Export</span>
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
