@@ -6,18 +6,30 @@ import { useNavigate } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { BiExit } from "react-icons/bi";
 const { ipcRenderer, shell } = window.require("electron");
-const Home = ({ setData }) => {
+const Home = ({ setData, setLoading }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
     ipcRenderer.on("results", (e, data) => {
-      //alert(JSON.stringify(data));
-      setData(data);
-      navigate("/analytics");
+      setLoading(false);
+      if (data.appMsg && data.appMsg === "cancelled") {
+        console.log("No file selected");
+      } else {
+        if (!data.nFiles) {
+          alert(
+            "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts"
+          );
+        } else {
+          //alert(JSON.stringify(data));
+          setData(data);
+          navigate("/analytics");
+        }
+      }
     });
   }, []);
 
   const openDirectoryPicker = () => {
+    setLoading(true);
     ipcRenderer.send("openDirectoryPicker");
   };
 

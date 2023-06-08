@@ -41,12 +41,15 @@ function createWindow() {
               win.webContents.send("results", res);
               console.log("SUCCESS");
             },
-            (err) => console.log(err)
+            (err) => {
+              win.webContents.send("results", {});
+              console.log(err);
+            }
           );
 
           console.log(response.filePaths[0]);
         } else {
-          console.log("no file selected");
+          win.webContents.send("results", { appMsg: "cancelled" });
         }
       });
   });
