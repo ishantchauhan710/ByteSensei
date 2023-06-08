@@ -4,10 +4,7 @@ const execa = require("execa");
 
 const calculateResults = async (folder) => {
   const { stdout, stderr, code, failed, killed, signal, timedOut } =
-    await execa("cloc", [
-      folder,
-      "--json",
-    ]);
+    await execa("node_modules/.bin/cloc", [folder, "--json"]);
 
   if (stderr !== "") throw new Error(stderr.trim());
   if (code !== 0) throw new Error("Unexpected returned code : " + code);
