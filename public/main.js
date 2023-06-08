@@ -4,7 +4,7 @@ const execa = require("execa");
 
 const calculateResults = async (folder) => {
   const { stdout, stderr, code, failed, killed, signal, timedOut } =
-    await execa("node_modules/.bin/cloc", [folder, "--json"]);
+    await execa("node_modules/.bin/cloc", ["--vcs=git", "--json", "."]);
 
   if (stderr !== "") throw new Error(stderr.trim());
   if (code !== 0) throw new Error("Unexpected returned code : " + code);
@@ -40,6 +40,7 @@ function createWindow() {
             (res) => {
               win.webContents.send("results", res);
               console.log("SUCCESS");
+              console.log(res);
             },
             (err) => {
               win.webContents.send("results", {});

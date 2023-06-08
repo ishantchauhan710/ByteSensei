@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaFolderPlus } from "react-icons/fa";
 import { FcFolder } from "react-icons/fc";
@@ -8,25 +8,32 @@ import { BiExit } from "react-icons/bi";
 const { ipcRenderer, shell } = window.require("electron");
 const Home = ({ setData, setLoading }) => {
   const navigate = useNavigate();
-
+  const [shouldNavigate, setShouldNavigate] = useState(false);
   useEffect(() => {
     ipcRenderer.on("results", (e, data) => {
       setLoading(false);
-      if (data.appMsg && data.appMsg === "cancelled") {
+      if (data && data.appMsg) {
         console.log("No file selected");
       } else {
-        if (!data.nFiles) {
+        if (!data.header) {
           alert(
             "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts"
           );
         } else {
           //alert(JSON.stringify(data));
           setData(data);
-          navigate("/analytics");
+          setShouldNavigate(true);
         }
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (shouldNavigate) {
+      navigate("/analytics");
+      setShouldNavigate(false);
+    }
+  }, [shouldNavigate]);
 
   const openDirectoryPicker = () => {
     setLoading(true);
