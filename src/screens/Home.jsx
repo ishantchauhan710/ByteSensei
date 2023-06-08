@@ -5,11 +5,14 @@ import { FcFolder } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { BsGithub } from "react-icons/bs";
 import { BiExit } from "react-icons/bi";
+import { IoMdSettings } from "react-icons/io";
+
 const { ipcRenderer, shell } = window.require("electron");
 const Home = ({ setData, setLoading }) => {
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
   useEffect(() => {
+    setData({});
     ipcRenderer.on("results", (e, data) => {
       setLoading(false);
       if (data && data.appMsg) {
@@ -40,6 +43,13 @@ const Home = ({ setData, setLoading }) => {
     ipcRenderer.send("openDirectoryPicker");
   };
 
+  const excludeFolders = () => {
+    let excludeRes = window.prompt("Please enter your name", "Harry Potter");
+    if (excludeRes != null) {
+      alert("Success");
+    }
+  };
+
   const openDocs = () => {
     shell.openExternal("https://www.github.com/ishantchauhan710/ByteSensei");
   };
@@ -62,6 +72,14 @@ const Home = ({ setData, setLoading }) => {
         >
           <FaFolderPlus />
           <div className="ml-3 text-lg">Select a folder</div>
+        </div>
+
+        <div
+          onClick={excludeFolders}
+          className="mt-3 w-1/2 py-3.5 text-2xl bg-neutral-700 rounded-md flex items-center justify-center cursor-pointer hover:bg-neutral-900"
+        >
+          <IoMdSettings />
+          <div className="ml-3 text-lg">Exclude Folders</div>
         </div>
 
         <div

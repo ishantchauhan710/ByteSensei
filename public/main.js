@@ -1,19 +1,27 @@
 const { app, ipcMain, dialog, BrowserWindow } = require("electron");
-const path = require("path");
-const execa = require("execa");
+const path = require("node:path");
+const util = require("node:util");
+const exec = util.promisify(require("node:child_process").exec);
 
 const calculateResults = async (folder) => {
-  const { stdout, stderr, code, failed, killed, signal, timedOut } =
-    await execa("node_modules/.bin/cloc", ["--vcs=git", "--json", "."]);
+  console.log("Folder: ", folder);
 
-  if (stderr !== "") throw new Error(stderr.trim());
-  if (code !== 0) throw new Error("Unexpected returned code : " + code);
-  if (failed !== false) throw new Error("Failure");
-  if (killed !== false) throw new Error("Program was killed");
-  if (signal !== null) throw new Error("Uncatched signal");
-  if (timedOut !== false) throw new Error("Timeout");
+  const { error, stdout, stderr } = await exec(
+    `cloc --json --exclude-dir="node_modules" ${folder}`
+  );
 
-  return JSON.parse(stdout);
+ 
+  if (stdout) {
+    console.log(stdout);
+    return JSON.parse(stdout);
+  }
+  if (error) {
+    console.log("Error: ", error);
+  }
+  if (stderr) {
+    console.log("Error");
+  }
+  return {};
 };
 
 function createWindow() {
