@@ -50,6 +50,12 @@ function createWindow() {
         }
       });
   });
+
+  ipcMain.on("closeApp", (event, args) => {
+    if (app) {
+      app.quit();
+    }
+  });
 }
 
 app.whenReady().then(createWindow);
