@@ -26,6 +26,8 @@ function createWindow() {
     },
   });
 
+  win.setMenu(null);
+
   win.loadURL("http://localhost:3000");
   //win.webContents.openDevTools();
 

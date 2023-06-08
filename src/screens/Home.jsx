@@ -20,7 +20,7 @@ const Home = ({ setData }) => {
   };
 
   return (
-    <div className="bg-neutral-900 text-white h-screen flex items-center justify-center">
+    <div className="bg-neutral-800 text-white h-screen flex items-center justify-center">
       <div className="w-1/2 h-1/2 flex items-center justify-center">
         <div
           onClick={openDirectoryPicker}
