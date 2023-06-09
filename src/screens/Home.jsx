@@ -20,14 +20,15 @@ const Home = ({
   useEffect(() => {
     setData({});
     ipcRenderer.on("results", (e, data) => {
-      setLoading(false);
       if (data && data.appMsg) {
         console.log("No file selected");
+        setLoading(false);
       } else {
         if (!data.by_file.header) {
           alert(
             "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts. Also ensure that the list of excluded directories only contain name or relative paths of files and folders and not any special characters / symbols. Refer to docs for more details"
           );
+          setLoading(false);
         } else {
           //alert(JSON.stringify(data));
           setData(data);
@@ -41,6 +42,7 @@ const Home = ({
     if (shouldNavigate) {
       navigate("/analytics");
       setShouldNavigate(false);
+      setLoading(false);
     }
   }, [shouldNavigate]);
 

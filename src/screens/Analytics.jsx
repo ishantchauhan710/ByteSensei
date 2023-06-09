@@ -23,7 +23,7 @@ const Analytics = ({ data }) => {
 
   const processData = () => {
     const newObj = Object.assign({}, data.by_lang);
-    //delete newObj.header;
+    delete newObj.header;
     const sum = newObj.SUM;
     delete newObj.SUM;
     return {
@@ -34,7 +34,7 @@ const Analytics = ({ data }) => {
 
   const processAdvancedResults = () => {
     const newObj = Object.assign({}, data.by_file);
-    //delete newObj.header;
+    delete newObj.header;
     const sum = newObj.SUM;
     delete newObj.SUM;
     return {
@@ -50,7 +50,7 @@ const Analytics = ({ data }) => {
 
   return (
     <div className="bg-neutral-800 text-white p-4">
-      <Header />
+      <Header data={data.appDir} />
       <BasicTable data={results} download={downloadImage} />
       <BarChart data={results} download={downloadImage} />
       <AdvancedTable data={advancedResults} download={downloadImage} />

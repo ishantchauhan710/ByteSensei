@@ -30,6 +30,7 @@ const ExcludeDialog = ({
 
     setShow(false);
   };
+  
 
   return (
     <div className="w-screen h-screen fixed bg-gray-900/60 flex items-center justify-center">
@@ -83,20 +84,6 @@ const ExcludeDialog = ({
               className="text-white bg-gray-800 hover:bg-gray-900  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             >
               Apply
-            </button>
-            <button
-              data-modal-hide="defaultModal"
-              type="button"
-              className="text-gray-500 bg-white hover:bg-gray-100  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
-            >
-              NodeJs
-            </button>
-            <button
-              data-modal-hide="defaultModal"
-              type="button"
-              className="text-gray-500 bg-white hover:bg-gray-100  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
-            >
-              Android
             </button>
           </div>
         </div>

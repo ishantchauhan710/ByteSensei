@@ -2,7 +2,7 @@ import React from "react";
 import { FcFolder } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ data }) => {
   const navigate = useNavigate();
   const close = () => {
     if (window.confirm("Are you sure you want to go back?") == true) {
@@ -13,9 +13,9 @@ const Header = () => {
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <div className="text-4xl font-bold py-2 flex items-center">
+        <div title={data} className="text-4xl font-bold py-2 flex items-center">
           <FcFolder className="mr-2 text-5xl" />
-          ByteSensei
+          {data.replace(/^.*[\\\/]/, "")}
         </div>
         <div>
           <button

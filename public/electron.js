@@ -52,7 +52,7 @@ function createWindow() {
 
   win.setMenu(null);
 
-  win.loadURL("http://localhost:3001");
+  win.loadURL("http://localhost:3000");
   //win.webContents.openDevTools();
 
   ipcMain.on("openDirectoryPicker", (event, args) => {
@@ -60,8 +60,10 @@ function createWindow() {
       .showOpenDialog({ properties: ["openDirectory"] })
       .then(function (response) {
         if (!response.canceled) {
-          calculateResults(response.filePaths[0], args.excludeDirs).then(
+          const dirPath = response.filePaths[0];
+          calculateResults(dirPath, args.excludeDirs).then(
             (res) => {
+              res.appDir = dirPath;
               win.webContents.send("results", res);
               console.log("SUCCESS");
               console.log(res);
