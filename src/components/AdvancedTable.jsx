@@ -1,13 +1,13 @@
 import React from "react";
 import { FaSave } from "react-icons/fa";
 
-const AdvancedTable = ({ data }) => {
+const AdvancedTable = ({ data, download }) => {
   return (
     <div className="mt-4">
       <div className="text-2xl font-bold py-2 flex items-center">
         Advance Details
       </div>
-      <div className="relative overflow-x-auto">
+      <div id="advancedTable" className="relative overflow-x-auto">
         <table className="w-full text-sm text-neutral-400 text-center">
           <thead className="text-xs  uppercase bg-neutral-700 text-neutral-400">
             <tr>
@@ -67,7 +67,10 @@ const AdvancedTable = ({ data }) => {
         </table>
       </div>
       <div className="flex items-center justify-end mx-2 my-3">
-        <button className="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
+        <button
+          onClick={() => download("advancedTable")}
+          className="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center"
+        >
           <FaSave className="text-lg mr-2" />
           <span className="text-sm">Export</span>
         </button>

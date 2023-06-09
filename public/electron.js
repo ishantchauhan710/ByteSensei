@@ -52,7 +52,7 @@ function createWindow() {
 
   win.setMenu(null);
 
-  win.loadURL("http://localhost:3000");
+  win.loadURL("http://localhost:3001");
   //win.webContents.openDevTools();
 
   ipcMain.on("openDirectoryPicker", (event, args) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSave } from "react-icons/fa";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
@@ -8,8 +8,19 @@ import { FcFolder } from "react-icons/fc";
 import Header from "../components/Header";
 import AdvancedTable from "../components/AdvancedTable";
 import DoghnutChart from "../components/DoghnutChart";
+import { download } from "downloadjs";
+import { toPng } from "html-to-image";
 
 const Analytics = ({ data }) => {
+  const downloadImage = (node) => {
+    toPng(document.getElementById(node)).then(function (dataUrl) {
+      const link = document.createElement("a");
+      link.download = "image.png";
+      link.href = dataUrl;
+      link.click();
+    });
+  };
+
   const processData = () => {
     const newObj = Object.assign({}, data.by_lang);
     //delete newObj.header;
@@ -40,10 +51,10 @@ const Analytics = ({ data }) => {
   return (
     <div className="bg-neutral-800 text-white p-4">
       <Header />
-      <BasicTable data={results} />
-      <BarChart data={results} />
-      <AdvancedTable data={advancedResults} />
-      <DoghnutChart data={results} />
+      <BasicTable data={results} download={downloadImage} />
+      <BarChart data={results} download={downloadImage} />
+      <AdvancedTable data={advancedResults} download={downloadImage} />
+      <DoghnutChart data={results} download={downloadImage} />
     </div>
   );
 };

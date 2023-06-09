@@ -9,7 +9,7 @@ import { FaSave } from "react-icons/fa";
 Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
-const BarChart = ({ data }) => {
+const BarChart = ({ data, download }) => {
   const [chartData, setChartData] = useState({
     labels: Object.entries(data.data).map((item) => item[0]),
     datasets: [
@@ -34,6 +34,7 @@ const BarChart = ({ data }) => {
     <div className="mt-4">
       <div className="w-9/12 lg:w-full flex item-center justify-center flex-col m-auto min-h-[400px]">
         <Bar
+          id="appBarChart"
           data={chartData}
           options={{
             responsive: true,
@@ -51,7 +52,10 @@ const BarChart = ({ data }) => {
         />
       </div>
       <div className="flex items-center justify-end mx-2 mt-3">
-        <button class="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center">
+        <button
+          onClick={() => download("appBarChart")}
+          className="bg-neutral-700 hover:bg-neutral-600 text-grey-darkest font-bold py-3 px-4 rounded inline-flex items-center"
+        >
           <FaSave className="text-lg mr-2" />
           <span className="text-sm">Export</span>
         </button>
