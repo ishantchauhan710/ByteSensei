@@ -3,14 +3,19 @@ import Home from "./screens/Home";
 import Analytics from "./screens/Analytics";
 import { useState } from "react";
 import ReactLoading from "react-loading";
+import ExcludeDialog from "./components/ExcludeDialog";
 
 function App() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showExcludeDialog, setShowExcludeDialog] = useState(true);
+  const [dirsToExclude, setDirsToExclude] = useState([]);
+  const [filesToExclude, setFilesToExclude] = useState([]);
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home setData={setData} setLoading={setLoading} />,
+      element: <Home setData={setData} setLoading={setLoading} setShowExcludeDialog={setShowExcludeDialog} />,
     },
     {
       path: "/analytics",
@@ -26,6 +31,12 @@ function App() {
             <ReactLoading type="spin" color="white" />
           </div>
         </div>
+      )}
+      {showExcludeDialog && (
+        <ExcludeDialog
+          show={showExcludeDialog}
+          setShow={setShowExcludeDialog}
+        />
       )}
       <RouterProvider router={router} />
     </div>

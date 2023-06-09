@@ -8,7 +8,7 @@ import { BiExit } from "react-icons/bi";
 import { IoMdSettings } from "react-icons/io";
 
 const { ipcRenderer, shell } = window.require("electron");
-const Home = ({ setData, setLoading }) => {
+const Home = ({ setData, setLoading, setShowExcludeDialog }) => {
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
   useEffect(() => {
@@ -44,10 +44,7 @@ const Home = ({ setData, setLoading }) => {
   };
 
   const excludeFolders = () => {
-    let excludeRes = window.prompt("Please enter your name", "Harry Potter");
-    if (excludeRes != null) {
-      alert("Success");
-    }
+    setShowExcludeDialog(true);
   };
 
   const openDocs = () => {
