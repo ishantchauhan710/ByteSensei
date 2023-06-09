@@ -2,49 +2,52 @@ const { app, ipcMain, dialog, BrowserWindow } = require("electron");
 const util = require("node:util");
 const exec = util.promisify(require("node:child_process").exec);
 const Store = require("electron-store");
+const path = require("node:path");
 Store.initRenderer();
 
 const calculateResults = async (folder, excludeDirs) => {
-  console.log("Folder: ", folder);
+  try {
+    console.log("Folder: ", folder);
+    console.log(excludeDirs.dirs);
+    console.log(excludeDirs.files);
 
-  console.log(excludeDirs.dirs);
-  console.log(excludeDirs.files);
+    let dirCommand = "";
+    let fileCommand = "";
 
-  let dirCommand = "";
-  let fileCommand = "";
+    if (excludeDirs.dirs && excludeDirs.dirs.length > 0) {
+      const dirsRegex = `"(${excludeDirs.dirs.join("|")})"`;
+      dirCommand = `--not-match-d=${dirsRegex}`;
+    }
 
-  if (excludeDirs.dirs && excludeDirs.dirs.length > 0) {
-    const dirsRegex = `"(${excludeDirs.dirs.join("|")})"`;
-    dirCommand = `--not-match-d=${dirsRegex}`;
+    if (excludeDirs.files && excludeDirs.files.length > 0) {
+      const filesRegex = `"(${excludeDirs.files.join("|")})"`;
+      fileCommand = `--not-match-f=${filesRegex}`;
+    }
+
+    const { error, stdout, stderr } = await exec(
+      `cloc --json --fullpath --by-file-by-lang  ${dirCommand} ${fileCommand} ${folder}`
+    );
+
+    if (stdout) {
+      console.log(stdout);
+      return JSON.parse(stdout);
+    }
+    if (error) {
+      console.log("Error: ", error);
+    }
+    if (stderr) {
+      console.log("Error");
+    }
+  } catch (err) {
+    return {};
   }
-
-  if (excludeDirs.files && excludeDirs.files.length > 0) {
-    const filesRegex = `"(${excludeDirs.files.join("|")})"`;
-    fileCommand = `--not-match-f=${filesRegex}`;
-  }
-
-  const { error, stdout, stderr } = await exec(
-    `cloc --json --fullpath --by-file-by-lang  ${dirCommand} ${fileCommand} ${folder}`
-  );
-
-  if (stdout) {
-    console.log(stdout);
-    return JSON.parse(stdout);
-  }
-  if (error) {
-    console.log("Error: ", error);
-  }
-  if (stderr) {
-    console.log("Error");
-  }
-  return {};
 };
 
 function createWindow() {
   const win = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
-    icon: __dirname + '/android-chrome-192x192.png',
+    icon: __dirname + "/android-chrome-192x192.png",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -52,7 +55,7 @@ function createWindow() {
   });
 
   win.setMenu(null);
-
+  //win.loadURL(`file://${path.join(__dirname, "../build/index.html")}`)
   win.loadURL("http://localhost:3000");
   //win.webContents.openDevTools();
 

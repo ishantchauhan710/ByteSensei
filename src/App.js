@@ -1,4 +1,10 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
 import Home from "./screens/Home";
 import Analytics from "./screens/Analytics";
 import { useEffect, useState } from "react";
@@ -30,7 +36,7 @@ function App() {
     let isPreviouslyUsed = store.get("isPreviouslyUsed");
     if (!isPreviouslyUsed) {
       setDirsToExclude(["node_modules"]);
-      setFilesToExclude([".env","package.json","package-lock.json"]);
+      setFilesToExclude([".env", "package.json", "package-lock.json"]);
       store.set("isPreviouslyUsed", true);
     }
   }, []);
@@ -42,25 +48,6 @@ function App() {
   useEffect(() => {
     store.set("filesToExclude", filesToExclude.toString());
   }, [filesToExclude]);
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <Home
-          setData={setData}
-          setLoading={setLoading}
-          setShowExcludeDialog={setShowExcludeDialog}
-          dirsToExclude={dirsToExclude}
-          filesToExclude={filesToExclude}
-        />
-      ),
-    },
-    {
-      path: "/analytics",
-      element: <Analytics data={data} />,
-    },
-  ]);
 
   return (
     <div>
@@ -81,7 +68,28 @@ function App() {
           setFilesToExclude={setFilesToExclude}
         />
       )}
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <Home
+                setData={setData}
+                setLoading={setLoading}
+                setShowExcludeDialog={setShowExcludeDialog}
+                dirsToExclude={dirsToExclude}
+                filesToExclude={filesToExclude}
+              />
+            }
+          />
+          <Route path="/analytics" element={<Analytics data={data} />} />
+          <Route
+            path="*"
+            element={<div>ByteSensei Error: Page not found</div>}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
