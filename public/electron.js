@@ -55,8 +55,9 @@ function createWindow() {
   });
 
   win.setMenu(null);
-  //win.loadURL(`file://${path.join(__dirname, "../build/index.html")}`)
-  win.loadURL("http://localhost:3000");
+  
+  win.loadURL(`file://${path.join(__dirname, "../build/index.html")}`)
+  //win.loadURL("http://localhost:3000");
   //win.webContents.openDevTools();
 
   ipcMain.on("openDirectoryPicker", (event, args) => {

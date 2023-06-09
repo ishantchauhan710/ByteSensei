@@ -1,9 +1,8 @@
 import {
   BrowserRouter,
   Route,
-  RouterProvider,
   Routes,
-  createBrowserRouter,
+  HashRouter
 } from "react-router-dom";
 import Home from "./screens/Home";
 import Analytics from "./screens/Analytics";
@@ -68,7 +67,7 @@ function App() {
           setFilesToExclude={setFilesToExclude}
         />
       )}
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             path="/"
@@ -89,7 +88,7 @@ function App() {
             element={<div>ByteSensei Error: Page not found</div>}
           />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
