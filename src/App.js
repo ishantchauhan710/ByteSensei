@@ -8,7 +8,7 @@ import ExcludeDialog from "./components/ExcludeDialog";
 function App() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showExcludeDialog, setShowExcludeDialog] = useState(true);
+  const [showExcludeDialog, setShowExcludeDialog] = useState(false);
   const [dirsToExclude, setDirsToExclude] = useState([]);
   const [filesToExclude, setFilesToExclude] = useState([]);
 
@@ -20,6 +20,8 @@ function App() {
           setData={setData}
           setLoading={setLoading}
           setShowExcludeDialog={setShowExcludeDialog}
+          dirsToExclude={dirsToExclude}
+          filesToExclude={filesToExclude}
         />
       ),
     },

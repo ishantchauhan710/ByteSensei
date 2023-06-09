@@ -3,14 +3,22 @@ const path = require("node:path");
 const util = require("node:util");
 const exec = util.promisify(require("node:child_process").exec);
 
-const calculateResults = async (folder) => {
+const calculateResults = async (folder, excludeDirs) => {
   console.log("Folder: ", folder);
 
+  console.log(excludeDirs.dirs);
+  console.log(excludeDirs.files);
+
+  let dirCommand = "";
+  if (excludeDirs.dirs && excludeDirs.dirs.length > 0) {
+    const dirsRegex = `"(${excludeDirs.dirs.join("|")})"`
+    dirCommand = `--not-match-d=${dirsRegex} --fullpath`;
+  }
+
   const { error, stdout, stderr } = await exec(
-    `cloc --json --exclude-dir="node_modules" ${folder}`
+    `cloc --json ${dirCommand} ${folder}`
   );
 
- 
   if (stdout) {
     console.log(stdout);
     return JSON.parse(stdout);
@@ -44,7 +52,7 @@ function createWindow() {
       .showOpenDialog({ properties: ["openDirectory"] })
       .then(function (response) {
         if (!response.canceled) {
-          calculateResults(response.filePaths[0]).then(
+          calculateResults(response.filePaths[0], args.excludeDirs).then(
             (res) => {
               win.webContents.send("results", res);
               console.log("SUCCESS");

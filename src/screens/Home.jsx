@@ -8,7 +8,13 @@ import { BiExit } from "react-icons/bi";
 import { IoMdSettings } from "react-icons/io";
 
 const { ipcRenderer, shell } = window.require("electron");
-const Home = ({ setData, setLoading, setShowExcludeDialog }) => {
+const Home = ({
+  setData,
+  setLoading,
+  setShowExcludeDialog,
+  dirsToExclude,
+  filesToExclude,
+}) => {
   const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState(false);
   useEffect(() => {
@@ -40,7 +46,9 @@ const Home = ({ setData, setLoading, setShowExcludeDialog }) => {
 
   const openDirectoryPicker = () => {
     setLoading(true);
-    ipcRenderer.send("openDirectoryPicker");
+    ipcRenderer.send("openDirectoryPicker", {
+      excludeDirs: { dirs: dirsToExclude, files: filesToExclude },
+    });
   };
 
   const excludeFolders = () => {
