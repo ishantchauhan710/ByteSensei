@@ -44,6 +44,7 @@ function createWindow() {
   const win = new BrowserWindow({
     minWidth: 800,
     minHeight: 600,
+    icon: __dirname + '/android-chrome-192x192.png',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
