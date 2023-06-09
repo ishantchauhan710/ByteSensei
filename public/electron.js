@@ -10,13 +10,20 @@ const calculateResults = async (folder, excludeDirs) => {
   console.log(excludeDirs.files);
 
   let dirCommand = "";
+  let fileCommand = "";
+
   if (excludeDirs.dirs && excludeDirs.dirs.length > 0) {
-    const dirsRegex = `"(${excludeDirs.dirs.join("|")})"`
-    dirCommand = `--not-match-d=${dirsRegex} --fullpath`;
+    const dirsRegex = `"(${excludeDirs.dirs.join("|")})"`;
+    dirCommand = `--not-match-d=${dirsRegex}`;
+  }
+
+  if (excludeDirs.files && excludeDirs.files.length > 0) {
+    const filesRegex = `"(${excludeDirs.files.join("|")})"`;
+    fileCommand = `--not-match-f=${filesRegex}`;
   }
 
   const { error, stdout, stderr } = await exec(
-    `cloc --json ${dirCommand} ${folder}`
+    `cloc --json --fullpath ${dirCommand} ${fileCommand} ${folder}`
   );
 
   if (stdout) {

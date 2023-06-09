@@ -26,7 +26,7 @@ const Home = ({
       } else {
         if (!data.header) {
           alert(
-            "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts"
+            "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts. Also ensure that the list of excluded directories only contain name or relative paths of files and folders and not any special characters / symbols. Refer to docs for more details"
           );
         } else {
           //alert(JSON.stringify(data));
