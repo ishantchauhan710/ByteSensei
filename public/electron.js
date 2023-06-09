@@ -23,38 +23,18 @@ const calculateResults = async (folder, excludeDirs) => {
     fileCommand = `--not-match-f=${filesRegex}`;
   }
 
-  const {
-    error: errorA,
-    stdout: stdoutA,
-    stderr: stderrA,
-  } = await exec(
-    `cloc --json --fullpath  ${dirCommand} ${fileCommand} ${folder}`
+  const { error, stdout, stderr } = await exec(
+    `cloc --json --fullpath --by-file-by-lang  ${dirCommand} ${fileCommand} ${folder}`
   );
 
-  if (stdoutA) {
-    //console.log(stdoutA);
-
-    const {
-      error: errorB,
-      stdout: stdoutB,
-      stderr: stderrB,
-    } = await exec(
-      `cloc --json --fullpath --by-file-by-lang ${dirCommand} ${fileCommand} ${folder}`
-    );
-
-    if (errorB) {
-      console.log("Error: ", errorB);
-    }
-    if (stderrB) {
-      console.log("Error");
-    }
-
-    return { basic: JSON.parse(stdoutA), advanced: JSON.parse(stdoutB) };
+  if (stdout) {
+    console.log(stdout);
+    return JSON.parse(stdout);
   }
-  if (errorA) {
-    console.log("Error: ", errorA);
+  if (error) {
+    console.log("Error: ", error);
   }
-  if (stderrA) {
+  if (stderr) {
     console.log("Error");
   }
   return {};
@@ -84,7 +64,7 @@ function createWindow() {
             (res) => {
               win.webContents.send("results", res);
               console.log("SUCCESS");
-              console.log(JSON.stringify(res));
+              console.log(res);
             },
             (err) => {
               win.webContents.send("results", {});

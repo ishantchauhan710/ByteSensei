@@ -11,8 +11,8 @@ import DoghnutChart from "../components/DoghnutChart";
 
 const Analytics = ({ data }) => {
   const processData = () => {
-    const newObj = Object.assign({}, data.basic);
-    delete newObj.header;
+    const newObj = Object.assign({}, data.by_lang);
+    //delete newObj.header;
     const sum = newObj.SUM;
     delete newObj.SUM;
     return {
@@ -22,8 +22,8 @@ const Analytics = ({ data }) => {
   };
 
   const processAdvancedResults = () => {
-    const newObj = Object.assign({}, data.advanced.by_file);
-    delete newObj.header;
+    const newObj = Object.assign({}, data.by_file);
+    //delete newObj.header;
     const sum = newObj.SUM;
     delete newObj.SUM;
     return {
