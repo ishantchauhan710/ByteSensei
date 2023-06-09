@@ -12,7 +12,7 @@ const AdvancedTable = ({ data }) => {
           <thead className="text-xs  uppercase bg-neutral-700 text-neutral-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                File Path
+                File Name
               </th>
               <th scope="col" className="px-6 py-3">
                 Language
@@ -39,7 +39,7 @@ const AdvancedTable = ({ data }) => {
                   className="px-6 py-4 font-medium whitespace-nowrap w-2 overflow-hidden text-white text-left"
                   title={item[0]}
                 >
-                  {item[0].replace(/^.*[\\\/]/, '')}
+                  {item[0].replace(/^.*[\\\/]/, "")}
                 </th>
                 <td className="px-6 py-4">{item[1].language}</td>
                 <td className="px-6 py-4">{item[1].code}</td>
