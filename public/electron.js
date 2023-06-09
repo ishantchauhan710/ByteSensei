@@ -1,7 +1,7 @@
 const { app, ipcMain, dialog, BrowserWindow } = require("electron");
 const util = require("node:util");
 const exec = util.promisify(require("node:child_process").exec);
-const Store = require('electron-store');
+const Store = require("electron-store");
 Store.initRenderer();
 
 const calculateResults = async (folder, excludeDirs) => {
@@ -23,18 +23,38 @@ const calculateResults = async (folder, excludeDirs) => {
     fileCommand = `--not-match-f=${filesRegex}`;
   }
 
-  const { error, stdout, stderr } = await exec(
-    `cloc --json --fullpath ${dirCommand} ${fileCommand} ${folder}`
+  const {
+    error: errorA,
+    stdout: stdoutA,
+    stderr: stderrA,
+  } = await exec(
+    `cloc --json --fullpath  ${dirCommand} ${fileCommand} ${folder}`
   );
 
-  if (stdout) {
-    console.log(stdout);
-    return JSON.parse(stdout);
+  if (stdoutA) {
+    //console.log(stdoutA);
+
+    const {
+      error: errorB,
+      stdout: stdoutB,
+      stderr: stderrB,
+    } = await exec(
+      `cloc --json --fullpath --by-file-by-lang ${dirCommand} ${fileCommand} ${folder}`
+    );
+
+    if (errorB) {
+      console.log("Error: ", errorB);
+    }
+    if (stderrB) {
+      console.log("Error");
+    }
+
+    return { basic: JSON.parse(stdoutA), advanced: JSON.parse(stdoutB) };
   }
-  if (error) {
-    console.log("Error: ", error);
+  if (errorA) {
+    console.log("Error: ", errorA);
   }
-  if (stderr) {
+  if (stderrA) {
     console.log("Error");
   }
   return {};
@@ -64,7 +84,7 @@ function createWindow() {
             (res) => {
               win.webContents.send("results", res);
               console.log("SUCCESS");
-              console.log(res);
+              console.log(JSON.stringify(res));
             },
             (err) => {
               win.webContents.send("results", {});

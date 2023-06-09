@@ -35,7 +35,7 @@ const AppChart = ({ data }) => {
       <div className="text-2xl font-bold py-2 flex items-center">
         Visualizations
       </div>
-      <div className="w-1/2 m-auto">
+      <div className="w-6/12 flex item-center justify-center flex-col m-auto min-h-[600px]">
         <Doughnut
           data={chartData}
           options={{
@@ -59,7 +59,7 @@ const AppChart = ({ data }) => {
           <span className="text-sm">Export</span>
         </button>
       </div>
-      <div className="w-1/2 m-auto min-h-[400px]">
+      <div className="w-9/12 lg:w-full flex item-center justify-center flex-col m-auto min-h-[400px]">
         <Bar
           data={chartData}
           options={{

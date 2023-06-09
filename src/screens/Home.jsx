@@ -24,7 +24,7 @@ const Home = ({
       if (data && data.appMsg) {
         console.log("No file selected");
       } else {
-        if (!data.header) {
+        if (!data.basic.header) {
           alert(
             "Unable to process this folder. Either the selected folder is empty, or it does not contain any programming scripts. Also ensure that the list of excluded directories only contain name or relative paths of files and folders and not any special characters / symbols. Refer to docs for more details"
           );

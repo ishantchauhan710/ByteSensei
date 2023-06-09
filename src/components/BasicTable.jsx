@@ -1,7 +1,7 @@
 import React from "react";
 import { FaSave } from "react-icons/fa";
 
-const Table = ({ data }) => {
+const BasicTable = ({ data }) => {
   return (
     <div className="mt-4">
       <div className="text-2xl font-bold py-2 flex items-center">
@@ -74,4 +74,4 @@ const Table = ({ data }) => {
   );
 };
 
-export default Table;
+export default BasicTable;
