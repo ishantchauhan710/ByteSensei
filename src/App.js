@@ -30,7 +30,7 @@ function App() {
     let isPreviouslyUsed = store.get("isPreviouslyUsed");
     if (!isPreviouslyUsed) {
       setDirsToExclude(["node_modules"]);
-      setFilesToExclude([".env"]);
+      setFilesToExclude([".env","package.json","package-lock.json"]);
       store.set("isPreviouslyUsed", true);
     }
   }, []);

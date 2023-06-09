@@ -26,6 +26,9 @@ const Table = ({ data }) => {
               <th scope="col" class="px-6 py-3">
                 Blank
               </th>
+              <th scope="col" class="px-6 py-3">
+                Percentage
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -41,6 +44,7 @@ const Table = ({ data }) => {
                 <td class="px-6 py-4">{item[1].code}</td>
                 <td class="px-6 py-4">{item[1].comment}</td>
                 <td class="px-6 py-4">{item[1].blank}</td>
+                <td class="px-6 py-4">{parseFloat((item[1].code/data.SUM.code)*100).toFixed(2)}%</td>               
               </tr>
             ))}
             <tr class="border-b bg-neutral-700/30 border-neutral-700 cursor-pointer">
@@ -54,6 +58,8 @@ const Table = ({ data }) => {
               <td class="px-6 py-4">{data.SUM.code}</td>
               <td class="px-6 py-4">{data.SUM.comment}</td>
               <td class="px-6 py-4">{data.SUM.blank}</td>
+              <td class="px-6 py-4">100%</td>
+  
             </tr>
           </tbody>
         </table>

@@ -45,7 +45,9 @@ const AppChart = ({ data }) => {
                 text: "Pie Chart",
               },
               datalabels: {
-                formatter: (val, ctx) => ctx.chart.data.labels[ctx.dataIndex],
+                //formatter: (val, ctx) => ctx.chart.data.labels[ctx.dataIndex],
+                formatter: (val, ctx) =>
+                  Math.round((val / data.SUM.code) * 100) + "%",
               },
             },
           }}
