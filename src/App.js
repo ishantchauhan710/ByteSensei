@@ -15,7 +15,13 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home setData={setData} setLoading={setLoading} setShowExcludeDialog={setShowExcludeDialog} />,
+      element: (
+        <Home
+          setData={setData}
+          setLoading={setLoading}
+          setShowExcludeDialog={setShowExcludeDialog}
+        />
+      ),
     },
     {
       path: "/analytics",
@@ -36,6 +42,10 @@ function App() {
         <ExcludeDialog
           show={showExcludeDialog}
           setShow={setShowExcludeDialog}
+          dirsToExclude={dirsToExclude}
+          setDirsToExclude={setDirsToExclude}
+          filesToExclude={filesToExclude}
+          setFilesToExclude={setFilesToExclude}
         />
       )}
       <RouterProvider router={router} />

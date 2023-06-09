@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ExcludeDialog = ({ show, setShow }) => {
+const ExcludeDialog = ({
+  show,
+  setShow,
+  dirsToExclude,
+  setDirsToExclude,
+  filesToExclude,
+  setFilesToExclude,
+}) => {
+  const [dirsContent, setDirsContent] = useState(dirsToExclude.join("\n"));
+  const [filesContent, setFilesContent] = useState(filesToExclude.join("\n"));
+
   const save = () => {
+    if (!dirsContent) {
+      setDirsToExclude([]);
+    } else {
+      const dirs = dirsContent.replace(/(^[ \t]*\n)/gm, "").split("\n");
+      setDirsToExclude(dirs);
+      //alert(dirs);
+    }
+
+    if (!filesContent) {
+      setFilesToExclude([]);
+    } else {
+      const files = filesContent.replace(/(^[ \t]*\n)/gm, "").split("\n");
+      setFilesToExclude(files);
+      //alert(files);
+    }
+
     setShow(false);
   };
 
@@ -39,11 +65,15 @@ const ExcludeDialog = ({ show, setShow }) => {
               rows={10}
               className="mr-1 w-full resize-none border border-gray-300 rounded-sm p-2 focus:outline-none"
               placeholder="List of directories to exclude (Line by line)"
+              value={dirsContent}
+              onChange={(e) => setDirsContent(e.target.value)}
             />
             <textarea
               rows={10}
               className="ml-1 w-full resize-none border border-gray-300 rounded-sm p-2 focus:outline-none"
               placeholder="List of files to exclude (Line by line)"
+              value={filesContent}
+              onChange={(e) => setFilesContent(e.target.value)}
             />
           </div>
           <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
