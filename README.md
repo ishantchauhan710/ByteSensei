@@ -3,7 +3,7 @@
 **ByteSensei** is a tool which analyses all the files in your project, figures out total number of lines of code in each file, programming languages used, total number of comments and much more!
 
 ## Demo
-[Here](https://www.youtube.com/watch?v=Ps-0f0K6izM) is a short video on how to use ByteSensei
+[Here](https://youtu.be/QUNWzkm6lEo) is a short video on how to use ByteSensei
 
 # ByteSensei Features :fire:
 - Calculate total number of lines of code in your project
