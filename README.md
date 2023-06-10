@@ -22,7 +22,7 @@
 |![](Screenshots/screen5.jpg)|![](Screenshots/screen4.jpg) |
 
 # Usage :bulb:
-1. Download this tool using the following links: ByteSensei Linux, ByteSensei Windows
+1. Download this tool using the following links: [ByteSensei Linux](https://drive.google.com/file/d/1S8_G_S8uem61PgzHlbT2Dk3g3A1sCVfb/view?usp=sharing), [ByteSensei Windows](https://drive.google.com/file/d/1oaCi-QPgRzlXVd6OiMvTbHpF9D5qSr3-/view?usp=sharing)
 2. Download cloc which is a command line tool that is necessary to make ByteSensei work properly. To download cloc, use the following links: [Cloc Linux](https://github.com/AlDanial/cloc/releases/download/v1.96/cloc-1.96.tar.gz) , [Cloc Windows](https://github.com/AlDanial/cloc/releases/download/v1.96/cloc-1.96.exe)
 3. Now simply run ByteSensei
 
